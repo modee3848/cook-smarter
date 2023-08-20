@@ -16,6 +16,37 @@ The project uses a variety of technologies to build a web application. Here's a 
 - **JavaScript**: Used for client-side scripting, such as form validation and other interactive features.
 
 ## Usage
+![1](Screeny/1.png)
+The main page is accessible to all users and offers the ability to search for recipes based on selected ingredients from a dropdown list or manually entered ingredient names.
+
+
+![2](Screeny/2.png)
+The above screen shows recipe suggestions for the given ingredients: milk, water, flour.
+
+![3](Screeny/3.png)
+There is also the option to search for recipe suggestions based on tags.
+
+![4](Screeny/4.png)
+These are the suggestions for the tag: dinner.
+
+![5](Screeny/5.png)
+Access to the "Moja Lodówka" section is restricted to logged-in users. Login is done through Google SSO, and basic information for storing user data is kept in the database. Currently, since the app is not verified, the ability to log in via SSO is limited to a pool of accounts set by the app developer. Therefore, the current setup allows for login using my Gmail accounts: main and student. OAuth2 Keys are currently not exposed in github from security reasons
+
+![6](Screeny/6.png)
+View of account information in the database from the left side: id, username, and email address.
+
+![7](Screeny/7.png)
+Suggested recipes based on inventory.
+
+![8](Screeny/8.png)
+Inventory of the logged-in user.
+
+![9](Screeny/9.png)
+The user can also rate a recipe both in the form of a 1-5 scale and report a review if it violates rules.
+
+![10](Screeny/10.png)
+Based on user ratings, a view of the top 10 highest-rated recipes is also generated.
+
 
 
 ## More details about database and logic in application
