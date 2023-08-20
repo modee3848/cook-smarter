@@ -1,0 +1,24 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+    <h1> top 10 przepisow</h1>
+    <table id="top10" style="border: 1px solid black;">
+        <tr>
+          <th>Przepis</th>
+          <th>Ocena</th>
+        </tr>
+        {% for r in results %}
+        <tr>
+            <td>{{ r[0] }}</td>
+            <td>{{ r[1] }}</td>        
+        </tr>
+        {% endfor %}
+    </table> 
+</body>
+</html>

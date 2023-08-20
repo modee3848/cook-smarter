@@ -1,0 +1,28 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <script type="text/javascript">
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
+    </script>
+</head>
+<body>
+    <h1>Wybierz przepis</h1>
+
+    <table id="przepisy_" style="border: 1px solid black">
+        <tr>
+          <th>nazwa</th>
+        </tr>
+        {% for row in results %}
+        <tr>
+            <td><a href="{{ url_for('recenzje_przepis', selected_recipe=row[0]) }}" id="selected_recipe">{{row[1]}}</a></td>
+        </tr>
+        {% endfor %}
+    </table>  
+</body>
+</html>
