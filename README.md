@@ -15,6 +15,9 @@ The project uses a variety of technologies to build a web application. Here's a 
 - **OAuth with Google**: Used for Single Sign-On (SSO) via Google accounts.
 - **JavaScript**: Used for client-side scripting, such as form validation and other interactive features.
 
+## Usage
+
+
 ## More details about database and logic in application
 
 The database consists of 10 tables:
@@ -415,3 +418,8 @@ Displays the top 10 recipes with the best ratings.
 #### 3) `top_10_najpop_przepisow`
 
 The 10 most popular recipes. The popularity rating is based on the number of reviews the recipe has received.
+
+## Things to do:
+
+- Increase the number of recipes (e.g., using a scraper and proper import from JSON files)
+- Verify the application through Google so that, once it is publicly released, all users with Google accounts can log in.
