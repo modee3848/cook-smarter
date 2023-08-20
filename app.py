@@ -18,8 +18,8 @@ oauth = OAuth(app)
 # Google OAuth Setup
 google = oauth.remote_app(
     'google',
-    consumer_key='370530652194-3a1gs1npalma1efqqi4k9h5rrsqo90n1.apps.googleusercontent.com',
-    consumer_secret='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',
+    consumer_key='XXXX',
+    consumer_secret='XXXXX',
     request_token_params={
         'scope': 'email profile',
     },
