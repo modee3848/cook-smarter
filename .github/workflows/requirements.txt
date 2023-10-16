@@ -53,4 +53,3 @@ urllib3==2.0.4
 yarl==1.9.2
 Flask==1.1.2
 gunicorn==20.0.4
-Flask-OAuth==0.9.5  # Updated version of Flask-OAuth
