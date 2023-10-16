@@ -6,7 +6,7 @@ from datetime import timedelta
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret key'
-app.config['MYSQL_HOST'] = 'database-project-pwr.mysql.database.azure.com'
+app.config['MYSQL_HOST'] = '34.28.170.221'
 app.config['MYSQL_USER'] = 'client'
 app.config['MYSQL_PASSWORD'] = 'Jp^Rdc5JN'
 app.config['MYSQL_DB'] = 'dbp3'
@@ -18,8 +18,8 @@ oauth = OAuth(app)
 # Google OAuth Setup
 google = oauth.remote_app(
     'google',
-    consumer_key='XXXX',
-    consumer_secret='XXXXX',
+    consumer_key='370530652194-3a1gs1npalma1efqqi4k9h5rrsqo90n1.apps.googleusercontent.com',
+    consumer_secret='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',
     request_token_params={
         'scope': 'email profile',
     },
