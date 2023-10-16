@@ -24,7 +24,7 @@ msal==1.24.0
 msal-extensions==1.0.0
 multidict==6.0.4
 numpy==1.25.2
-oauthlib==3.2.0  # Pozostawienie tej wersji
+oauthlib==3.2.0
 openai==0.28.0
 packaging==23.1
 pbr==5.11.1
@@ -53,5 +53,4 @@ urllib3==2.0.4
 yarl==1.9.2
 Flask==1.1.2
 gunicorn==20.0.4
-Flask-OAuth==0.14.0  # Zastąpienie flask-oauthlib
-
+Flask-OAuth==0.12  # Updated version of Flask-OAuth
