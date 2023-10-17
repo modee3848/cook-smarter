@@ -14,7 +14,6 @@ contourpy==1.1.0
 cryptography==41.0.3
 cycler==0.11.0
 dill==0.3.7
-Flask-Dance==3.3.0  # Zastąpiono flask-oauthlib
 fonttools==4.42.1
 frozenlist==1.4.0
 idna==3.4
@@ -25,7 +24,7 @@ msal==1.24.0
 msal-extensions==1.0.0
 multidict==6.0.4
 numpy==1.25.2
-oauthlib==2.1.0  # Zmieniono na 2.1.0 zgodnie z wymaganiami flask-oauthlib
+oauthlib==3.2.2
 openai==0.28.0
 packaging==23.1
 pbr==5.11.1
@@ -37,10 +36,11 @@ pycparser==2.21
 PyJWT==2.8.0
 pyparsing==3.1.1
 python-dateutil==2.8.2
+pywin32==306
 qiskit==0.44.1
 qiskit-terra==0.25.1
 requests==2.31.0
-requests-oauthlib==1.1.0  # Zmieniono na 1.1.0 zgodnie z wymaganiami flask-oauthlib
+requests-oauthlib==1.3.1
 rustworkx==0.13.1
 schedule==1.2.0
 scipy==1.11.2
