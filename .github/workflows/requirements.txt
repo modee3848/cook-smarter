@@ -25,7 +25,7 @@ msal==1.24.0
 msal-extensions==1.0.0
 multidict==6.0.4
 numpy==1.25.2
-oauthlib==3.2.2
+oauthlib==2.1.0  # Zmieniono na 2.1.0 zgodnie z wymaganiami flask-oauthlib
 openai==0.28.0
 packaging==23.1
 pbr==5.11.1
@@ -40,7 +40,7 @@ python-dateutil==2.8.2
 qiskit==0.44.1
 qiskit-terra==0.25.1
 requests==2.31.0
-requests-oauthlib==1.3.1
+requests-oauthlib==1.1.0  # Zmieniono na 1.1.0 zgodnie z wymaganiami flask-oauthlib
 rustworkx==0.13.1
 schedule==1.2.0
 scipy==1.11.2
