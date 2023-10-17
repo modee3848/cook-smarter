@@ -34,7 +34,7 @@ jobs:
       - name: Install dependencies
         run: |
          pip install -r requirements.txt
-         pip install flask_oauthlib oauthlib==2.1.0 requests-oauthlib==1.1.0
+        
 
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
       - name: Zip artifact for deployment
