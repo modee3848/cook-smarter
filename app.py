@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
-from flask_oauthlib.client import OAuth
+from authlib.integrations.flask_client import OAuth
 from flask_mysqldb import MySQL
 from datetime import timedelta
 
@@ -15,45 +15,39 @@ app.permanent_session_lifetime = timedelta(minutes=5)
 mysql = MySQL(app)
 oauth = OAuth(app)
 
-# Google OAuth Setup
-google = oauth.remote_app(
-    'google',
-    consumer_key='370530652194-3a1gs1npalma1efqqi4k9h5rrsqo90n1.apps.googleusercontent.com',
-    consumer_secret='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',
-    request_token_params={
-        'scope': 'email profile',
-    },
-    base_url='https://www.googleapis.com/oauth2/v1/',
-    request_token_url=None,
-    access_token_method='POST',
-    access_token_url='https://accounts.google.com/o/oauth2/token',
-    authorize_url='https://accounts.google.com/o/oauth2/auth',
+
+google = oauth.register(
+     'google',
+     client_id='370530652194-3a1gs1npalma1efqqi4k9h5rrsqo90n1.apps.googleusercontent.com',
+     client_secret='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',
+     access_token_url='https://accounts.google.com/o/oauth2/token',
+     authorize_url='https://accounts.google.com/o/oauth2/auth',
+     authorize_params=None,
+     access_token_params=None,
+     refresh_token_url=None,
+     redirect_uri='http://bsiaw-projekt.switzerlandnorth.cloudapp.azure.com/login/authorized',
+     client_kwargs={'scope': 'openid profile email'},
+     jwks_uri='https://accounts.google.com/.well-known/openid-configuration'
+
 )
 
 
 
-@google.tokengetter
-def get_google_oauth_token():
-    return session.get('google_token')
-
 @app.route('/login')
 def login_google():
-    return google.authorize(callback=url_for('authorized', _external=True))
+    redirect_uri = url_for('authorized', _external=True)
+    return google.authorize_redirect(redirect_uri)
 
 @app.route('/login/authorized')
 def authorized():
-    response = google.authorized_response()
-    if response is None or response.get('access_token') is None:
-        return 'Access denied: reason={} error={}'.format(
-            request.args['error_reason'],
-            request.args['error_description']
-        )
+    token = google.authorize_access_token()
+    resp = google.get('https://www.googleapis.com/oauth2/v2/userinfo')
+    user_info = resp.json()
 
-    session['google_token'] = (response['access_token'], '')
-    user_info = google.get('userinfo')
-    session['user_email'] = user_info.data['email']
-    session['user_name'] = user_info.data['name']
-    session['user_id'] = user_info.data['id']
+    session['google_token'] = token['access_token']
+    session['user_email'] = user_info['email']
+    session['user_name'] = user_info['name']
+    session['user_id'] = user_info['id']
     session['loggedin'] = True
 
     cur = mysql.connection.cursor()
@@ -61,8 +55,6 @@ def authorized():
                VALUES (%s, %s, %s, %s, %s, %s) ON DUPLICATE KEY UPDATE nazwa=VALUES(nazwa), email=VALUES(email)"""
 
     id_user = session['user_id']
-    print(id_user)
-
     nazwa = session['user_name']
     email = session['user_email']
     sub = ""  
@@ -70,14 +62,11 @@ def authorized():
     status = 0
 
     cur.execute(query, (id_user, nazwa, email, sub, dodatkowe_informacje, status))
-
     mysql.connection.commit()
-
     cur.close()
-
     return redirect(url_for('index'))
 
-
+"""
     
 #Old way to login without using SSO 
 """
@@ -101,7 +90,7 @@ def login_traditional():
             msg = 'Incorrect username !'
 
     return render_template('login.html', msg=msg)
-"""
+
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -138,8 +127,7 @@ def index():
         query_recipe_name='CALL szukanie_po_nazwach(%s)'
         query_tags = 'CALL szukaj_po_tagu(%s)'
 
-        if selected_ingredients:
-            
+        if selected_ingredients:            
             cur.execute(query, (selected_ingredients_string,))
 
         elif selected_ingredients2:
