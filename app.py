@@ -6,9 +6,9 @@ from datetime import timedelta
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret key'
-app.config['MYSQL_HOST'] = ''
-app.config['MYSQL_USER'] = ''
-app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_HOST'] = '34.28.170.221'
+app.config['MYSQL_USER'] = 'client'
+app.config['MYSQL_PASSWORD'] = 'Jp^Rdc5JN'
 app.config['MYSQL_DB'] = 'dbp3'
 app.permanent_session_lifetime = timedelta(minutes=5)
 
@@ -27,7 +27,7 @@ google = oauth.register(
      refresh_token_url=None,
      redirect_uri='http://bsiaw-projekt.switzerlandnorth.cloudapp.azure.com/login/authorized',
      client_kwargs={'scope': 'openid profile email'},
-     jwks_uri='https://accounts.google.com/.well-known/openid-configuration'
+     jwks_uri='https://www.googleapis.com/oauth2/v3/certs'
 
 )
 
