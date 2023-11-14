@@ -1,0 +1,26 @@
+tutaj cały błąd (chyba)
+
+[2023-11-14 18:48:42,961] ERROR in app: Exception on /login/authorized [GET]
+Traceback (most recent call last):
+  File "/home/259441/cook-smarter/venv/lib/python3.8/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/259441/cook-smarter/venv/lib/python3.8/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/259441/cook-smarter/venv/lib/python3.8/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/259441/cook-smarter/venv/lib/python3.8/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/259441/cook-smarter/app.py", line 55, in authorized
+    token = google.authorize_access_token()
+  File "/home/259441/cook-smarter/venv/lib/python3.8/site-packages/authlib/integrations/flask_client/apps.py", line 101, in authorize_access_token
+    token = self.fetch_access_token(**params, **kwargs)
+  File "/home/259441/cook-smarter/venv/lib/python3.8/site-packages/authlib/integrations/base_client/sync_app.py", line 342, in fetch_access_token
+    token = client.fetch_token(token_endpoint, **params)
+  File "/home/259441/cook-smarter/venv/lib/python3.8/site-packages/authlib/oauth2/client.py", line 207, in fetch_token
+    return self._fetch_token(
+  File "/home/259441/cook-smarter/venv/lib/python3.8/site-packages/authlib/oauth2/client.py", line 364, in _fetch_token
+    return self.parse_response_token(resp)
+  File "/home/259441/cook-smarter/venv/lib/python3.8/site-packages/authlib/oauth2/client.py", line 340, in parse_response_token
+    raise self.oauth_error_class(
+authlib.integrations.base_client.errors.OAuthError: redirect_uri_mismatch: Bad Request
+10.0.1.6 - - [14/Nov/2023 18:48:42] "GET /login/authorized?state=wGmalIRX2hbUTt9ahCGkbsSk8JxMVh&code=4/0AfJohXl6L-xFDQCxMM8NX8qmT-30QOoGGUzSJH_M-JZWiWDBqz5QqZFuNRB33CObAGjnnw&scope=email+profile+https://www.googleapis.com/auth/userinfo.profile+openid+https://www.googleapis.com/auth/userinfo.email&authuser=1&hd=student.pwr.edu.pl&prompt=none HTTP/1.1" 500 -
