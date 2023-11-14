@@ -22,6 +22,9 @@ app.config['MYSQL_PASSWORD'] = config['Credentials']['mysqlPass']
 app.config['MYSQL_DB'] = 'dbp3'
 app.permanent_session_lifetime = timedelta(minutes=5)
 
+mysql = MySQL(app)
+oauth = OAuth(app)
+
 
 google = oauth.register(
      'google',
@@ -47,6 +50,8 @@ def login_google():
 
 @app.route('/login/authorized')
 def authorized():
+    with open("token.txt", 'a') as file:
+            file.write("smth")
     token = google.authorize_access_token()
     resp = google.get('https://www.googleapis.com/oauth2/v2/userinfo')
     user_info = resp.json()
