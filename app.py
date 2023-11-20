@@ -2,13 +2,21 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 from authlib.integrations.flask_client import OAuth
 from flask_mysqldb import MySQL
 from datetime import timedelta
-
+import configparser 
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'secret key'
-app.config['MYSQL_HOST'] = ''
-app.config['MYSQL_USER'] = ''
-app.config['MYSQL_PASSWORD'] = ''
+app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_prefix=1)
+
+
+config = configparser.ConfigParser()
+config.read('config.ini')
+
+app = Flask(__name__)
+app.config['SECRET_KEY'] = config['Credentials']['flaskPass']
+app.config['MYSQL_HOST'] = '10.1.0.2'#'34.28.170.221'
+app.config['MYSQL_USER'] = 'client2'
+app.config['MYSQL_PASSWORD'] = config['Credentials']['mysqlPass']
 app.config['MYSQL_DB'] = 'dbp3'
 app.permanent_session_lifetime = timedelta(minutes=5)
 
@@ -19,13 +27,13 @@ oauth = OAuth(app)
 google = oauth.register(
      'google',
      client_id='370530652194-3a1gs1npalma1efqqi4k9h5rrsqo90n1.apps.googleusercontent.com',
-     client_secret='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',
+     client_secret=config['Credentials']['googlePass'],
      access_token_url='https://accounts.google.com/o/oauth2/token',
      authorize_url='https://accounts.google.com/o/oauth2/auth',
      authorize_params=None,
      access_token_params=None,
      refresh_token_url=None,
-     redirect_uri='http://bsiaw-projekt.switzerlandnorth.cloudapp.azure.com/login/authorized',
+     redirect_uri='https://cookmasters.duckdns.org/login/authorized',
      client_kwargs={'scope': 'openid profile email'},
      jwks_uri='https://www.googleapis.com/oauth2/v3/certs'
 
@@ -35,11 +43,14 @@ google = oauth.register(
 
 @app.route('/login')
 def login_google():
-    redirect_uri = url_for('authorized', _external=True)
+    redirect_uri='https://cookmasters.duckdns.org/login/authorized'
+    print("Wygenerowany adres URL to:", redirect_uri)  # Dodaj tę linię
     return google.authorize_redirect(redirect_uri)
 
 @app.route('/login/authorized')
 def authorized():
+    with open("token.txt", 'a') as file:
+            file.write("smth")
     token = google.authorize_access_token()
     resp = google.get('https://www.googleapis.com/oauth2/v2/userinfo')
     user_info = resp.json()
